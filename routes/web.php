@@ -26,8 +26,12 @@ Route::group([ 'middleware'=>'auth'], function () {
     Route::get('/video_cours_update/{id}', 'PostController@ajouter_video')->name('video.update');
 
     //cours live
+    Route::get('/cours_en_ligne', 'PostController@index2')->name('cours_en_ligne');
     Route::get('livecours', 'Postcontroller@live')->name('cours.livecours');
-
+    Route::post('/cours/store_live', 'PostController@store_live')->name('cours.store_live');
+    Route::get('/cours/live/delete/{id}', 'PostController@destroylive')->name('cours_en_ligne.delete');
+    Route::get('/cours/live/edit/{id}', 'PostController@editlive')->name('cours_live.edit');
+    Route::post('/cours/live/update/{id}', 'PostController@updatelive')->name('cours_live.update');
     /** Route cour payent */
     Route::get('/cours/create_payent', 'PostController@create_payent')->name('cours.create_payent');
     Route::get('/cours/store_payent', 'PostController@store_payent')->name('cours.store_payent');

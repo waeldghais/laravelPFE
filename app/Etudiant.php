@@ -25,6 +25,10 @@ protected $hidden = [
     {
         return $this->belongsToMany('App\Post');
     }
+    public function coursenli()
+    {
+        return $this->belongsToMany('App\Cours_En_Linge');
+    }
     public function message()
     {
         return $this->hasMany('App\Message');

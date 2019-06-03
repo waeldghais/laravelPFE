@@ -1,24 +1,72 @@
 @extends('layouts.app')
 
-
 @section('content')
-    <div class="container">
-        <div class="col-sm-12">
-        <div class="row">
-            <div class="col-sm-6">
-                <button onclick="playVid()" type="button" class="btn btn-primary">Démarrer le Video</button>
+    <div>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
 
-        <video controls id="video" width="700px" height="400"  style="margin: auto"></video>
-        <canvas id="canvas" width="700px" height="400"></canvas>
+                <div class="card-header"><b>Création Cours en ligne</b></div>
 
-    </div>
-                <div class="col-sm-6">
+                <div class="card-body">
+                    @if(count($errors)>0)
 
-
+                        <ul class="navbar-nav mr-auto">
+                            @foreach($errors->all() as $error)
+                                <li class="nav-item active">
+                                    {{ $errors}}
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
-    </div>
+                @if(Session::has("creatmatiere"))
+                    <div class="alert alert-success">
+                        <b>Cours en ligne Ajouter</b>
+                    </div>
+                @endif
+                <form action="{{route('cours.store_live')}}" enctype="multipart/form-data" method="POST">
+                    {{csrf_field()}}
+
+                    <div class="form-group">
+                        <label for="category">Matiere</label>
+                        <select class="form-control" name="category_id" id="category">
+                            @foreach ($matieres as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group"  >
+                        <label for="titel">Titre</label>
+
+                        <input type="text" class="form-control" name="titel" id="titel" placeholder="Enter titel">
+                        <br>
+                    </div>
+                    <div class="form-group"  >
+                        <label for="prix">Prix de Cours</label>
+                        <input type="number" class="form-control" name="prix"  placeholder="Enter Prix de cours"><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="conten">Description</label>
+                        <textarea class="form-control" name="conten" id="conten" rows="8" cols="8"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photo">image</label>
+                        <br>
+                        <div class="upload-btn-wrapper">
+                            <button class="btn">choisissez une image</button>
+                            <input type="file" name="image" id="image" accept="image/png , image/jpeg"/>
+                        </div>
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary">Sauvgarder</button>
+                </form>
+
+            </div>
         </div>
     </div>
-    <script src="{{ URL::asset('assets/js/video.js')}}"></script>
-    <script src="{{ URL::asset('assets/js/simperre.js')}}"></script>
+
 @endsection

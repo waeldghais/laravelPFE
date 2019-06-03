@@ -123,6 +123,7 @@
                         </ul>
                     </li>
                     <li><a href="{{route('packs')}}">Packs</a></li>
+                    <li><a href="{{route('WebSite.live')}}">Cours en direct</a></li>
                     <li><a href="{{route('utilisation')}}">Manuel d'utilisation</a></li>
                     <li><a href="{{route('WebSite.contact')}}">Contact</a></li>
                     @if ($etuds)
@@ -206,17 +207,7 @@
 
 
                   <!-- start single sidebar -->
-                  <div class="mu-single-sidebar">
-                    <div class="tag-cloud">
-                        <a href="{{ route('index')}}">Accueil</a>
-                                @foreach($categories as $cat)
-                                    <a href="{{ route('WebSite.matiere',['matiere_id'=>$cat->id]) }}">{{$cat->name}}</a>
-                                @endforeach
-                        <a href="{{route('packs')}}">Packs</a>
-                        <a href="{{route('utilisation')}}">Manuel d'utilisation</a>
-                        <a href="{{route('WebSite.contact')}}">Contact</a>
-                    </div>
-                  </div>
+
                   <!-- end single sidebar -->
 
                 </aside>
@@ -310,6 +301,48 @@
                     </div>
 
                     </div>
+                <div class="col-md-3">
+                    <!-- start sidebar -->
+                    <aside class="mu-sidebar">
+                        <!-- start single sidebar -->
+
+                        <!-- end single sidebar -->
+                        <!-- start single sidebar -->
+                        <div class="mu-single-sidebar">
+                            <h3>Cours En Ligne</h3>
+                            <div class="mu-sidebar-popular-courses">
+                                @foreach($courslive as $courslives)
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="{{route('WebSite.live')}}">
+                                                <img class="media-object" src="{{  URL::asset($courslives->photo)}}" alt="img">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="{{route('WebSite.live')}}">{{$courslives->titel}}</a></h4>
+                                            <span class="popular-course-price">{{$courslives->prix}} TND</span>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+
+                        <!-- end single sidebar -->
+                        <!-- start single sidebar -->
+                        <div class="mu-single-sidebar">
+                            <div class="tag-cloud">
+                                <a href="{{ route('index')}}">Accueil</a>
+                                @foreach($categories as $cat)
+                                    <a href="{{ route('WebSite.matiere',['matiere_id'=>$cat->id]) }}">{{$cat->name}}</a>
+                                @endforeach
+                                <a href="{{route('packs')}}">Packs</a>
+                                <a href="{{route('utilisation')}}">Manuel D'utilisation</a>
+                                <a href="{{route('WebSite.contact')}}">Contact</a>
+                            </div>
+                        </div>
+                        <!-- end single sidebar -->
+                    </aside>
                 </div>
            </div>
 

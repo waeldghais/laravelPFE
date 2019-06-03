@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Cours_En_Linge;
 use App\Pack;
 use App\Setting;
 use Illuminate\Http\Request;
@@ -29,6 +30,12 @@ class PostController extends Controller
     {
         $user=User::find(auth()->id());
         return view('cours.index')->with('cours',Post::all())->with('users',User::all())
+            ->with('userr',$user);
+    }
+    public function index2()
+    {
+        $user=User::find(auth()->id());
+        return view('cours.index2')->with('cours',Cours_En_Linge::all())->with('users',User::all())
             ->with('userr',$user);
     }
     /**
@@ -144,6 +151,12 @@ class PostController extends Controller
         return view('cours.edit')->with('cours',$post)
             ->with('matieres',Category::all())->with('vids',VidCours::all());
     }
+    public function editlive($id)
+    {
+        $post = Cours_En_Linge::find($id);
+        return view('cours.editlive')->with('cours',$post)
+            ->with('matieres',Category::all());
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -152,8 +165,20 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {//$image = $this->addImage($request,'file','uploads/posts');
+    {
         $post=Post::find($id);
+        $image = $this->addImage($request,'file','uploads/posts',$id);
+        $post->titel =$request->titel;
+        $post->content =$request->content;
+        $post->matiere_id= $request->matiere_id;
+        $post->photo ='uploads/posts/'.$image;
+        $post->save();
+        Session::flash('creatmatiere');
+        return redirect()->back();
+    }
+    public function updatelive(Request $request, $id)
+    {
+        $post=Cours_En_Linge::find($id);
         $image = $this->addImage($request,'file','uploads/posts',$id);
         $post->titel =$request->titel;
         $post->content =$request->content;
@@ -198,6 +223,12 @@ class PostController extends Controller
         $post->destroy($id);
         return redirect()->route('cours');
     }
+    public function destroylive($id)
+    {
+        $post=  Cours_En_Linge::find($id);
+        $post->destroy($id);
+        return redirect()->route('cours_en_ligne');
+    }
     /**
      * Save image files
      *
@@ -207,6 +238,35 @@ class PostController extends Controller
      * @param  string  $filename
      * @return string
      */
+
+    public function live(Request $request)
+    {
+        $categories = Category::all();
+        return view('cours.livecours')->with('matieres',$categories);
+    }
+    public function store_live(Request $request)
+    {
+        $this->validate($request,[
+            "titel"=>"required",
+            "conten"=>"required",
+            "category_id"=>"required",
+            "prix"=>"required",
+            "image" =>"required|max:20000",
+        ]);
+        $image = $this->addImage($request,'image','uploads/posts');
+        Cours_En_Linge::create( [
+            "titel"=>$request->titel,
+            "content"=>$request->conten,
+            "matiere_id"=>$request->category_id,
+            "user_id"=>auth()->id(),
+            "prix"=>$request->prix,
+            "photo" =>'uploads/posts/'.$image,
+            "slug"=>str_slug($request->titel)
+        ]);
+        Session::flash('creatmatiere');
+        return redirect()->back();
+    }
+
     private function addImage($request, $input, $path) :string {
         if($request->hasFile($input)){
             $name = $request->file($input)->getClientOriginalName();
@@ -218,10 +278,5 @@ class PostController extends Controller
             $outputName = '1.png';
         }
         return $outputName;
-    }
-    public function live(Request $request)
-    {
-
-        return view('cours.livecours');
     }
 }

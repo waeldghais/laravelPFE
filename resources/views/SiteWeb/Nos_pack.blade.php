@@ -115,13 +115,14 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="{{route('packs')}}">Nos Packs</a></li>
-                    <li><a href="{{route('utilisation')}}">Manuel D'utilisation</a></li>
+                    <li><a href="{{route('packs')}}">Packs</a></li>
+                    <li><a href="{{route('WebSite.live')}}">Cours en direct</a></li>
+                    <li><a href="{{route('utilisation')}}">Manuel d'utilisation</a></li>
                     <li><a href="{{route('WebSite.contact')}}">Contact</a></li>
                     @if ($etuds)
                     <li><table class="table" style="margin-top: 10px;">
                             <tr class="warning">
-                                <td>{{$etuds->solde}}&nbsp;&nbsp;&nbsp;  DTN</td>
+                                <td>{{$etuds->solde}}&nbsp;&nbsp;&nbsp;  TND</td>
                                 <td><a href="{{route('payement.code')}}"><span class="glyphicon glyphicon-plus"></span></a></td>
                             </tr></table></li>
                         @endif
@@ -181,22 +182,12 @@
                                 <!-- end single sidebar -->
 
                                 <!-- start single sidebar -->
-                                <div class="mu-single-sidebar">
-                                    <div class="tag-cloud">
-                                        <a href="{{ route('index')}}">Accueil</a>
-                                        @foreach($categories as $cat)
-                                            <a href="{{ route('WebSite.matiere',['matiere_id'=>$cat->id]) }}">{{$cat->name}}</a>
-                                        @endforeach
-                                        <a href="{{route('packs')}}">Packs</a>
-                                        <a href="{{route('utilisation')}}">Manuel d'utilisation</a>
-                                        <a href="{{route('WebSite.contact')}}">Contact</a>
-                                    </div>
-                                </div>
+
                                 <!-- end single sidebar -->
                             </aside>
                             <!-- / end sidebar -->
                         </div>
-                        <div class="col-md-8" >
+                        <div class="col-md-6" >
                             @if(Session::has('pack_acheter'))
                                 <div class="alert alert-success" role="alert">
                                     Pack Acheter.Consulter <a href="{{route('Etudiant.Mes_cours',['etud_id'=>$etuds->id])}}">Mes cours</a> pour voir les video de votre pack !!
@@ -204,7 +195,7 @@
                             @endif
                             @foreach($packs as $pack)
                                     <div class="card-columns">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="card bg-danger">
                                                 <div class="card-body text-center">
                                                     <br>
@@ -227,6 +218,49 @@
 
                             @endforeach
 
+                        </div>
+                        <div class="col-md-3">
+                            <!-- start sidebar -->
+                            <aside class="mu-sidebar">
+                                <!-- start single sidebar -->
+
+                                <!-- end single sidebar -->
+                                <!-- start single sidebar -->
+                                <div class="mu-single-sidebar">
+                                    <h3>Cours En Ligne</h3>
+                                    <div class="mu-sidebar-popular-courses">
+                                        @foreach($courslive as $courslives)
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a href="{{route('WebSite.live')}}">
+                                                        <img class="media-object" src="{{  URL::asset($courslives->photo)}}" alt="img">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="{{route('WebSite.live')}}">{{$courslives->titel}}</a></h4>
+                                                    <span class="popular-course-price">{{$courslives->prix}} TND</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+
+                                <!-- end single sidebar -->
+                                <!-- start single sidebar -->
+                                <div class="mu-single-sidebar">
+                                    <div class="tag-cloud">
+                                        <a href="{{ route('index')}}">Accueil</a>
+                                        @foreach($categories as $cat)
+                                            <a href="{{ route('WebSite.matiere',['matiere_id'=>$cat->id]) }}">{{$cat->name}}</a>
+                                        @endforeach
+                                        <a href="{{route('packs')}}">Packs</a>
+                                        <a href="{{route('utilisation')}}">Manuel D'utilisation</a>
+                                        <a href="{{route('WebSite.contact')}}">Contact</a>
+                                    </div>
+                                </div>
+                                <!-- end single sidebar -->
+                            </aside>
                         </div>
                     </div>
                 </div>

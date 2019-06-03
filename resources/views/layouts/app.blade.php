@@ -205,7 +205,8 @@ background-color: white;
                     Cours En ligne
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{route('cours.livecours')}}">Diffuser le cours en direct</a>
+                    <a class="dropdown-item" href="{{route('cours.livecours')}}">Ajouter Cours En ligne</a>
+                    <a class="dropdown-item" href="{{route('cours_en_ligne')}}">Nos Cours En ligne</a>
                 </div>
 
             </li>

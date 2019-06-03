@@ -136,7 +136,8 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="{{route('packs')}}">Nos Packs</a></li>
+                    <li><a href="{{route('packs')}}">Packs</a></li>
+                    <li><a href="{{route('WebSite.live')}}">Cours en direct</a></li>
                     <li><a href="{{route('utilisation')}}">Manuel d'utilisation</a></li>
                     <li><a href="{{route('WebSite.contact')}}">Contact</a></li>
                     @if ($etuds)

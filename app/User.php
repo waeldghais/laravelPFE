@@ -36,6 +36,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post');
     }
+    public function coursenli()
+    {
+        return $this->hasMany('App\Cours_En_Lunge');
+    }
      public function demande_enseigant()
     {
         return $this->hasMany('App\Denseigant');

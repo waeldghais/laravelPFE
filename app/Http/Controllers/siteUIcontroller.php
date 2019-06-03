@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cours_En_Linge;
 use App\Message;
 use App\Pack;
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ class siteUIcontroller extends Controller
         $mat=Category::find($matiere_id);
         $user=User::all();
         $paks=Pack::all();
-        return view('SiteWeb.matiere')->with('paks',$paks)->with('Settings',Setting::find(1))->with('categories',Category::all())
+        $cours_ligne=Cours_En_Linge::all();
+        return view('SiteWeb.matiere')->with('courslive',$cours_ligne)->with('paks',$paks)->with('Settings',Setting::find(1))->with('categories',Category::all())
             ->with('cours',$cour)->with('etuds',$etud)->with('mats',$mat)->with('users',$user)->with('vids',$vids);
     }
 
@@ -50,15 +52,17 @@ class siteUIcontroller extends Controller
     public function pack(Request $request)
     {   $packs=Pack::all();
     $cours=Post::all();
+        $cours_ligne=Cours_En_Linge::all();
         $etud= $request->session()->get('etudiant');
-        return view('SiteWeb.Nos_pack')->with('cours',$cours)->with('Settings',Setting::find(1))->with('etuds',$etud)->with('packs',$packs)->with('categories',Category::all());
+        return view('SiteWeb.Nos_pack')->with('courslive',$cours_ligne)->with('cours',$cours)->with('Settings',Setting::find(1))->with('etuds',$etud)->with('packs',$packs)->with('categories',Category::all());
     }
 public function live(Request $request)
 {
     $packs=Pack::all();
     $cours=Post::all();
+    $cours_ligne=Cours_En_Linge::all();
     $etud= $request->session()->get('etudiant');
-    return view('SiteWeb.live')->with('cours',$cours)->with('Settings',Setting::find(1))->with('etuds',$etud)->with('packs',$packs)->with('categories',Category::all());;
+    return view('SiteWeb.live')->with('courslive',$cours_ligne)->with('cours',$cours)->with('Settings',Setting::find(1))->with('etuds',$etud)->with('packs',$packs)->with('categories',Category::all());;
 }
 
 }
