@@ -49,13 +49,15 @@
 
         .btn {
             border: 2px solid gray;
-            color: gray;
-            background-color: orange;
+            color: rgba(0, 0, 0, 0.7) ;
+            background-color: #ffe0b2;
             padding: 8px 20px;
             border-radius: 8px;
             font-size: 20px;
             font-weight: bold;
         }
+
+
 
         .upload-btn-wrapper input[type=file] {
             font-size: 100px;

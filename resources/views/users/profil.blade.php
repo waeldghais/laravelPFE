@@ -13,6 +13,7 @@
             background-size: cover;
 
         }
+
     </style>
 <div class="bga">
     <!-- Page breadcrumb -->
@@ -38,7 +39,7 @@
                     <input type="file" name="file" id="file" accept="image/png, image/jpeg"/>
                 </div>
                 <br>
-                    <button type="submit" class="btn btn">Changer</button>
+                    <button type="submit" class="btn">Changer</button>
             </form>
         </div>
         @else
@@ -52,7 +53,7 @@
                     <input type="file" name="file" id="file" accept="image/png, image/jpeg"/>
                 </div>
                 <br>
-                    <button type="submit" class="btn btn">Ajouter une photo de profil</button>
+                    <button type="submit" class="btn">Ajouter une photo de profil</button>
             </form>
         </div>
         @endif
@@ -110,7 +111,7 @@
                         <td>
                             <div class=col-sm-10>
 
-                                <input type="tel" class=form-control id=Numero name=Numero value={{$users->phone}}>
+                                <input type="text" class=form-control id=Numero name=Numero value={{$users->phone}}>
                                 </div>
                         </td>
                     </tr>
@@ -124,7 +125,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button type="submit" class="btn btn-warning">Modfier</button>
+                            <button type="submit" class="btn ">Modfier</button>
                         </td>
                     </tr>
                 </table>
@@ -174,7 +175,7 @@
                         <div class=col-sm-6>
                             <input type="password" class=form-control id=password name=Confirmation >
                         </div>
-                        <button type="submit" class="btn btn-warning">Modfier</button>
+                        <button type="submit" class="btn ">Modfier</button>
                     </form>
                 </td>
             </tr >

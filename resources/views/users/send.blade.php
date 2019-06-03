@@ -1,76 +1,86 @@
 @extends('layouts.app')
-<script>
-    function myFunction() {
-        if(!confirm("Êtes-vous sûr de supprimer ce message"))
-            event.preventDefault();
-    }
-</script>
 @section('content')
-    <!-- Page breadcrumb -->
-    <section >
+    <style type="text/css">
+        .bga {
+            /* The image used */
+            background-image: url('/assets/img/ground.jpg');
 
-                       <center><h2>Répondez aux message</h2></center>
 
-    </section>
-    <!-- End breadcrumb -->
-    @if($users->photo)
-        <div class=col-sm-2>
 
-            <div id="parent">
-                <form action="{{route('Updateuserimage',['id' => $users->id ])}}" class="form-inline" enctype="multipart/form-data"
-                      id="form_login" method="POST">
-                    {{csrf_field()}}
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
 
-                    <img src="{{ URL::asset($users->photo)}}" class="img-thumbnail" width="120px" height="120px" alt="">
+        }
 
-                    <div class="upload-btn-wrapper">
-                        <button class="btn">choisissez une image</button>
-                        <input type="file" name="file" id="file" accept="image/png, image/jpeg"/>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn">Changer</button>
-                </form>
-            </div>
-            @else
-                <div class=col-sm-2 >
-                    <div id="parent">
-                        <form class="form-inline" id="form_login" action="{{route('Updateuserimage',['id' => $users->id ])}}" method="POST" enctype="multipart/form-data" >
-                            {{csrf_field()}}
+    </style>
+    <div class="bga">
+        <!-- Page breadcrumb -->
+        <section >
 
-                            <div class="upload-btn-wrapper">
-                                <button class="btn">choisissez une image</button>
-                                <input type="file" name="file" id="file" accept="image/png, image/jpeg"/>
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn">Ajouter une photo de profil</button>
-                        </form>
-                    </div>
-                    @endif
+            <center><h2>Répondez aux message</h2></center>
 
-                    <br>
 
-                    <ul >
-                        <a href="{{route('users.profil',['id'=> Auth::user()->id])}}"><li class="list-group-item list-group-item-dark" ><span class="glyphicon glyphicon-user"></span>Profil</li></a>
+        </section>
+        <!-- End breadcrumb -->
+        @if($users->photo)
+            <div class=col-sm-2>
+
+                <div id="parent">
+                    <form action="{{route('Updateuserimage',['id' => $users->id ])}}" class="form-inline" enctype="multipart/form-data"
+                          id="form_login" method="POST">
+                        {{csrf_field()}}
+
+                        <img src="{{ URL::asset($users->photo)}}" class="rounded-circle" width="120px" height="100px" alt="">
+
+                        <div class="upload-btn-wrapper">
+                            <button class="btn">choisissez une image</button>
+                            <input type="file" name="file" id="file" accept="image/png, image/jpeg"/>
+                        </div>
                         <br>
-                        <a href="{{ url('/home') }}"><li class="list-group-item list-group-item-dark"><span class="glyphicon glyphicon-home"></span> Aceuil</li></a>
-                        <br>
-
-                        <a href="{{route('users.message',['id'=> Auth::user()->id])}}"><li class="list-group-item list-group-item-dark"> <span class="glyphicon glyphicon-envelope"></span> Message</li></a>
-                        <br>
-
-                        <a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
-                            <li class="list-group-item list-group-item-dark"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        </a>
-
-                    </ul>
-
+                        <button type="submit" class="btn">Changer</button>
+                    </form>
                 </div>
+                @else
+                    <div class=col-sm-2 >
+                        <div id="parent">
+                            <form class="form-inline" id="form_login" action="{{route('Updateuserimage',['id' => $users->id ])}}" method="POST" enctype="multipart/form-data" >
+                                {{csrf_field()}}
+
+                                <div class="upload-btn-wrapper">
+                                    <button class="btn">choisissez une image</button>
+                                    <input type="file" name="file" id="file" accept="image/png, image/jpeg"/>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn">Ajouter une photo de profil</button>
+                            </form>
+                        </div>
+                        @endif
+
+                        <br>
+
+                        <ul >
+                            <a href="{{route('users.profil',['id'=> Auth::user()->id])}}"><li class="list-group-item list-group-item-dark" ><span class="glyphicon glyphicon-user"></span>Profil<span class="badge"></span></li></a>
+                            <br>
+
+
+                            <a href="{{route('users.message',['id'=> Auth::user()->id])}}"><li class="list-group-item list-group-item-dark"> <span class="glyphicon glyphicon-envelope"></span>Message</li></a>
+                            <br>
+
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+                                <li class="list-group-item list-group-item-dark"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </a>
+
+                        </ul>
+
+                    </div>
                 <div class="col-sm-10"  >
 
                     <div class="col-sm-5"  >
@@ -97,7 +107,7 @@
                             <b>Message Envoyer</b>
                         </div>
                         @endif
-                        <img src="{{asset('assets/img/email.jpg')}}" style="margin-top: 0%;">
+                        <img src="{{asset('assets/img/email.jpg')}}" style="margin-top: 50px; margin-left: 100px;">
                     </div>
 
                 </div>

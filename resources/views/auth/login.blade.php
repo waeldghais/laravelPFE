@@ -32,7 +32,7 @@
                                 @endif
 
                              <div class="form-group row">
-                            <label for="password" class=" col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class=" col-form-label text-md-right">{{ __('Mot de passe') }}</label>
                                 <input id="password" type="password"  name="password" value="" required autofocus class="form-control">
                             </div>
                              @if ($errors->has('password'))
@@ -43,7 +43,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('connexion') }}
+                                    {{ __('Connexion') }}
                                 </button>
 
                             </div>
