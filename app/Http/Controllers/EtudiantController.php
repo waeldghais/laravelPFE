@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Cour_Etudiant;
+use App\Cours_En_Linge;
+use App\Cours_Linge_etud;
 use App\Etudiant;
 use App\Pack;
 use App\Pack_Etudiant;
@@ -179,8 +181,16 @@ public function password_etud_update(Request $request)
         $packs_etudiant=Pack_Etudiant::all();
         $pack=Pack::all();
         $vid_packs=VidPack::all();
-        return view('Etudiant.Mes_cours')->with('packs_etudiant',$packs_etudiant)->with('packs',$pack)->with( 'vid_packs',$vid_packs)->with('vid_cours',$vid_cours)->with('cours',$cour)->with('cours_etudiant',$cours_etudiant)->with('Settings',Setting::find(1))->with('categories',Category::all())->with('etuds',$etud);
+        $cour_live_etudiant=Cours_Linge_etud::all();
+        $live=Cours_En_Linge::all();
+        return view('Etudiant.Mes_cours')->with('lives',$live)->with('cour_live_etudiant',$cour_live_etudiant)->with('packs_etudiant',$packs_etudiant)->with('packs',$pack)->with( 'vid_packs',$vid_packs)->with('vid_cours',$vid_cours)->with('cours',$cour)->with('cours_etudiant',$cours_etudiant)
+            ->with('Settings',Setting::find(1))->with('categories',Category::all())->with('etuds',$etud);
 
+    }
+    public function go_live($id)
+    {
+        $etud =Etudiant::find($id);
+        return view('Etudiant.go_live')->with('etuds',$etud)->with('Settings',Setting::find(1));
     }
     public function create()
     {
@@ -300,20 +310,24 @@ public function password_etud_update(Request $request)
             return redirect()->back();
         }
     }
+
     public function detaille(Request $request,$id)
     {
         $cour=Post::find($id);
         $paks=Pack::all();
+        $cours_ligne=Cours_En_Linge::all();
+
         $etud = $request->session()->get('etudiant');
-        return view('SiteWeb.detaille')->with('paks',$paks)->with('cours',$cour)->with('Settings', Setting::find(1))->with('etuds', $etud)->with('categories', Category::all());
+        return view('SiteWeb.detaille')->with('courslive',$cours_ligne)->with('paks',$paks)->with('cours',$cour)->with('Settings', Setting::find(1))->with('etuds', $etud)->with('categories', Category::all());
     }
 
     public function detaille_pack(Request $request,$id)
     {
         $paks=Pack::find($id);
         $cour=Post::all();
+        $cours_ligne=Cours_En_Linge::all();
         $etud = $request->session()->get('etudiant');
-        return view('SiteWeb.detaille_pk')->with('paks',$paks)->with('cours',$cour)->with('Settings', Setting::find(1))->with('etuds', $etud)->with('categories', Category::all());
+        return view('SiteWeb.detaille_pk')->with('courslive',$cours_ligne)->with('paks',$paks)->with('cours',$cour)->with('Settings', Setting::find(1))->with('etuds', $etud)->with('categories', Category::all());
     }
 
 
@@ -325,7 +339,26 @@ public function password_etud_update(Request $request)
         return redirect()->back();
     }
 
+    public function acheter_live(Request $request,$id_etud,$id_live)
+    {
+        $etuds=Etudiant::find($id_etud);
+        $live=Cours_En_Linge::find($id_live);
 
+        if($etuds->solde >= $live->prix)
+        {
+            DB::table('cour_linge_etudiant')->insert(
+                ['id_cour_l' =>$live->id , 'id_etudiant' => $etuds->id]
+            );
+            $etuds->solde=$etuds->solde-$live->prix;
+            $etuds->save();
+            Session::flash('pack_acheter');
+            return redirect()->back();
+        }else{
+            $etud = $request->session()->get('etudiant');
+            Session::flash('Solde_insuffisant');
+            return redirect()->back();
+        }
+    }
     private function addImage($request, $input, $path, $filename) :string {
         if($request->hasFile($input)){
             $extension = $request->file($input)->getClientOriginalName();

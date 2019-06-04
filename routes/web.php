@@ -122,9 +122,16 @@ Route::get('Manuel', 'siteUIcontroller@utilisation')->name('utilisation');
 //route Les packs
 Route::get('Packs', 'siteUIcontroller@pack')->name('packs');
 //route payement
+  //payement
 Route::get('creat/code', 'EtudiantController@index_code')->name('payement.code');
 Route::post('code/envoyer/{id}', 'EtudiantController@code')->name('payement.envoyer');
+//cour
 Route::get('acheter_cour/{id_etud}/{id_cour}', 'EtudiantController@acheter')->name('acheter_cour');
 Route::get('detaille_cours/{id_cour}', 'EtudiantController@detaille')->name('detaille_cours');
+//pack
 Route::get('acheter_pack/{id_etud}/{id_pack}', 'EtudiantController@acheter_pack')->name('acheter_pack');
 Route::get('detaille_pack/{id_pack}', 'EtudiantController@detaille_pack')->name('detaille_pack');
+//live
+Route::get('acheter_live/{id_etud}/{id_live}', 'EtudiantController@acheter_live')->name('acheter_live');
+Route::get('go_live/{id_etud}', 'EtudiantController@go_live')->name('go_live');
+

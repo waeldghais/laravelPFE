@@ -159,116 +159,17 @@
         </ul>
 
     </div>
-    <div class=col-sm-10 >
-        <center><h3>Cours Acheter</h3></center>
-        @foreach($cours_etudiant as $cour_etu)
-            @if($cour_etu->id_etudiant == $etuds->id)
-             @foreach($cours as $cour)
-                @if($cour->id == $cour_etu->id_cour)
 
-                        <table class="table table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Contenu</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{{$cour->titel}}</td>
-                                <td>{{$cour->content}}</td>
-                            </tr>
-                            @foreach($vid_cours as $vid_cour)
-                                @if($cour->id == $vid_cour->cour_id)
-                                <tr>
 
-                                    <td><li>{{$vid_cour->name}}</li></td>
-                                    <td>
-                                        <li role="presentation"
-                                            onclick="document.getElementById('vidcour[]').innerHTML =' <center><b>{{$vid_cour->name}}</b></center><h6 align=right><a onclick=Fermer() href>(X) Fermer</a></h6><center><iframe class=embed-responsive-item src={{ URL::asset($vid_cour->video)}} width=570 height=350></iframe></center>' ">
-                                            <a role="menuitem" tabindex="-1" href="#" style="color: #b91d19;">Video de Cours <span class="glyphicon glyphicon-play-circle"></span></a></li>
-                                    </td>
-                                </tr>
 
-                                @endif
-                            @endforeach
-                            <tr><td colspan="2" id="vidcour[]"></td></tr>
-                            </tbody>
-                        </table>
+                    <div class="col-md-6">
+                        <iframe src="https://player.twitch.tv/?channel=clvtunis" frameborder="0" allowfullscreen="true" scrolling="no" height="500" width="900"  style="margin-left: 30px; margin-top: 30px;"></iframe>
+                    </div>
+            <div class="col-md-4">
+                <iframe src="https://www.twitch.tv/embed/clvtunis/chat" frameborder="0" scrolling="no" height="500" width="350" style="margin-left: 30px; margin-top: 30px;"></iframe>
+            </div>
+        </div>
 
-                    @endif
-                @endforeach
-            @endif
-            @endforeach
-
-        <hr class="new2">
-        <center><h3>Packs Acheter</h3></center>
-        @foreach($packs_etudiant as $pack_etu)
-            @if($pack_etu->id_etudiant == $etuds->id)
-                @foreach($packs as $pack)
-                    @if($pack->id == $pack_etu->id_pack)
-
-                        <table class="table table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Contenu</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{{$pack->titel}}</td>
-                                <td>{{$pack->content}}</td>
-                            </tr>
-                            @foreach($vid_packs as $vid_pack)
-                                @if($pack->id == $vid_pack->pack_id)
-                                    <tr>
-                                        <td><li>{{$vid_pack->name}}</li></td>
-                                        <td>
-                                            <li role="presentation"
-                                                onclick="document.getElementById('vidpack[]').innerHTML =' <center><b>{{$vid_pack->name}}</b></center><h6 align=right><a onclick=Fermer() href>(X) Fermer</a></h6><center><iframe class=embed-responsive-item src={{ URL::asset($vid_pack->video)}} width=570 height=350></iframe></center>' ">
-                                                <a role="menuitem" tabindex="-1" href="#" style="color: #b91d19;">Video de Pack <span class="glyphicon glyphicon-play-circle"></span></a></li>
-                                        </td>
-                                    </tr>
-
-                                @endif
-                            @endforeach
-                            <tr><td colspan="2" id="vidpack[]"></td></tr>
-                            </tbody>
-                        </table>
-                    @endif
-                @endforeach
-            @endif
-        @endforeach
-
-        <hr class="new2">
-        <center><h3>Cours en ligne Acheter</h3></center>
-        @foreach($cour_live_etudiant as $pack_etu)
-            @if($pack_etu->id_etudiant == $etuds->id)
-                @foreach($lives as $pack)
-                    @if($pack->id == $pack_etu->id_cour_l)
-
-                        <table class="table table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Contenu</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th>{{$pack->titel}}</th>
-                                <th>{{$pack->content}}</th>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <a href="{{ route('go_live',['etud_id'=>$etuds->id])}}"><button type="button" class=" btn-primary" style="margin: auto;">Démarrer le cours</button>
-                        </a>
-                    @endif
-                @endforeach
-            @endif
-        @endforeach
-    </div>
     <script src="{{ URL::asset('https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')}}"></script>
     <script src="{{ URL::asset('https://oss.maxcdn.com/respond/1.4.2/respond.min.js')}}"></script>
 </section>

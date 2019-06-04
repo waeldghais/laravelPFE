@@ -189,36 +189,24 @@
                                 <!-- end single sidebar -->
 
                                 <!-- start single sidebar -->
-                                <div class="mu-single-sidebar">
-                                    <div class="tag-cloud">
-                                        <a href="{{ route('index')}}">Accueil</a>
-                                        @foreach($categories as $cat)
-                                            <a href="{{ route('WebSite.matiere',['matiere_id'=>$cat->id]) }}">{{$cat->name}}</a>
-                                        @endforeach
-                                        <a href="{{route('packs')}}">Packs</a>
-                                        <a href="{{route('utilisation')}}">Manuel d'utilisation</a>
-                                        <a href="{{route('WebSite.contact')}}">Contact</a>
-                                    </div>
-                                </div>
+
                                 <!-- end single sidebar -->
 
                             </aside>
                             <!-- / end sidebar -->
                         </div>
 
-                        <div class="col-md-9" >
+                        <div class="col-md-6" >
                             @if(Session::has('Cour_acheter'))
                                 <div class="alert alert-success" role="alert">
                                     Coure Acheter.Consulter <a href="{{route('Etudiant.Mes_cours',['etud_id'=>$etuds->id])}}">Mes cours</a> pour voir les video de votre cours !!
                                 </div>
                             @endif
-                                <div class="card text-white bg-success mb-3" >
-                                <div class="col-md-3" >
-                                    <div class="tab-content">
-                                        <img class="media-object" src="{{  URL::asset($cours->photo)}}" alt="img" width="275px" height="183px">
-                                    </div>
+                                <div class="tab-content">
+                                    <img class="media-object" src="{{  URL::asset($cours->photo)}}" alt="img" width="200px" height="150px" style="margin: auto">
                                 </div>
-                                <div class="col-md-8" >
+
+<br>
                                     <div class="tab-content">
                                         <P style="margin-left:8em"><a href="#" class="text-primary">Titre de Cours :</a> {{$cours->titel}}</P>
                                         <P style="margin-left:8em"><a href="#" class="text-primary">Contenu de cours :</a> {{$cours->content}}</P>
@@ -235,8 +223,50 @@
                                             <center><a href="{{route('Etudiant.LoginEtudiant')}}" class="btn btn-success" >Acheter</a></center>
                                         @endif
                                     </div>
+
+
                                 </div>
+                        <div class="col-md-3">
+                            <!-- start sidebar -->
+                            <aside class="mu-sidebar">
+                                <!-- start single sidebar -->
+
+                                <!-- end single sidebar -->
+                                <!-- start single sidebar -->
+                                <div class="mu-single-sidebar">
+                                    <h3>Cours En Ligne</h3>
+                                    <div class="mu-sidebar-popular-courses">
+                                        @foreach($courslive as $courslives)
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a href="{{route('WebSite.live')}}">
+                                                        <img class="media-object" src="{{  URL::asset($courslives->photo)}}" alt="img">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="{{route('WebSite.live')}}">{{$courslives->titel}}</a></h4>
+                                                    <span class="popular-course-price">{{$courslives->prix}} TND</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
+
+
+                                <!-- end single sidebar -->
+                                <!-- start single sidebar -->
+                                <div class="mu-single-sidebar">
+                                    <div class="tag-cloud">
+                                        <a href="{{ route('index')}}">Accueil</a>
+                                        @foreach($categories as $cat)
+                                            <a href="{{ route('WebSite.matiere',['matiere_id'=>$cat->id]) }}">{{$cat->name}}</a>
+                                        @endforeach
+                                        <a href="{{route('packs')}}">Packs</a>
+                                        <a href="{{route('utilisation')}}">Manuel D'utilisation</a>
+                                        <a href="{{route('WebSite.contact')}}">Contact</a>
+                                    </div>
+                                </div>
+                            </aside>
                         </div>
                     </div>
                 </div>

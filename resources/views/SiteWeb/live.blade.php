@@ -182,9 +182,14 @@
                             <!-- / end sidebar -->
                         </div>
                         <div class="col-md-6" >
+                            @if(Session::has('Solde_insuffisant'))
+                                <div class="alert alert-danger" role="alert">
+                                    Solde de votre compte insuffisant.Veuillez <a href="{{route('payement.code')}}"><b>recharger</b></a>  votre compte.
+                                </div>
+                            @endif
                             @if(Session::has('pack_acheter'))
-                                <div class="alert alert-success" role="alert">
-                                    Pack Acheter.Consulter <a href="{{route('Etudiant.Mes_cours',['etud_id'=>$etuds->id])}}">Mes cours</a> pour voir les video de votre pack !!
+                                <div class="alert alert-info" role="alert">
+                                    Cour en ligne Acheter.Consulter <a href="{{route('Etudiant.Mes_cours',['etud_id'=>$etuds->id])}}">Mes cours</a> pour participer au cours !!
                                 </div>
                             @endif
                             @foreach($courslive as $courslives)
@@ -199,7 +204,7 @@
                                                         <p class="card-text" >{{$courslives->content}}.</p>
                                                         <b style="color: #3495e3">{{$courslives->prix}} TND</b></center><br>
                                                     @if ($etuds)
-                                                        <a href="{{route('acheter_pack',['id_etud'=>$etuds->id,'id_pack'=>$pack->id])}}" class="btn btn-success" >Acheter</a>
+                                                        <a href="{{route('acheter_live',['id_etud'=>$etuds->id,'id_live'=>$courslives->id])}}" class="btn btn-success" >Acheter</a>
                                                     @else
                                                         <a href="{{route('Etudiant.LoginEtudiant')}}"  class="btn btn-success" >Acheter</a>
                                                     @endif

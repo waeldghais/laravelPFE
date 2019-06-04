@@ -188,6 +188,11 @@
                             <!-- / end sidebar -->
                         </div>
                         <div class="col-md-6" >
+                            @if(Session::has('Solde_insuffisant'))
+                                <div class="alert alert-danger" role="alert">
+                                    Solde de votre compte insuffisant.Veuillez <a href="{{route('payement.code')}}"><b>recharger</b></a>  votre compte.
+                                </div>
+                            @endif
                             @if(Session::has('pack_acheter'))
                                 <div class="alert alert-success" role="alert">
                                     Pack Acheter.Consulter <a href="{{route('Etudiant.Mes_cours',['etud_id'=>$etuds->id])}}">Mes cours</a> pour voir les video de votre pack !!
