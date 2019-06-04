@@ -7,14 +7,8 @@
     <div class="row justify-content-center ">
 
         <div class="col-md-10" style="margin-top: 25px">
-
             <center><img src="{{ URL::asset('assets/img/LOGO-Pro.png')}}" height="80px" width="150px"></center>
             <canvas id="myChart"  style="max-height: 50% !important; "></canvas>
-
-
-
-
-
         </div>
     </div>
 @endsection

@@ -213,7 +213,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+<br>
                             @endforeach
                         </div>
                         <div class="col-md-3">
