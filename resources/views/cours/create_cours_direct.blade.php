@@ -19,11 +19,7 @@
                         </ul>
                     @endif
                 </div>
-                @if(Session::has("creatmatiere"))
-                    <div class="alert alert-success">
-                        <b>Cours en ligne Ajouter</b>
-                    </div>
-                @endif
+
                 <form action="{{route('cours.store_live')}}" enctype="multipart/form-data" method="POST">
                     {{csrf_field()}}
 

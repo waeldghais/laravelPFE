@@ -20,11 +20,6 @@
 
             <div class="card-body">
 
-                @if(Session::has("creatmatiere"))
-                    <div class="alert alert-success">
-                        <b>Cours en ligne Modfier</b>
-                    </div>
-                @endif
                 <form action="{{route('cours_live.update',['id' => $cours->id ])}}" enctype="multipart/form-data" method="POST">
 
                     {{ csrf_field() }}

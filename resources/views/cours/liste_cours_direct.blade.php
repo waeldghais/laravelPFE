@@ -11,6 +11,23 @@
             <div class="col-md-10">
 
                 <div class="card-header"><b>Cours en ligne</b></div>
+                @if(Session::has("creatmatiere"))
+                    <div class="alert alert-success">
+                        <b>Cours en ligne Ajouter</b>
+                    </div>
+                @endif
+
+                @if(Session::has("modfiermatiere"))
+                    <div class="alert alert-success">
+                        <b>Cours en ligne Modfier</b>
+                    </div>
+                @endif
+
+                @if(Session::has("supprimer_cours"))
+                    <div class="alert alert-danger">
+                        <b>Cours en ligne supprimer</b>
+                    </div>
+                @endif
                 <div class="card-body">
                     @if ($cours->count()>0)
 

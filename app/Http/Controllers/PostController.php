@@ -35,7 +35,7 @@ class PostController extends Controller
     public function index2()
     {
         $user=User::find(auth()->id());
-        return view('cours.index2')->with('cours',Cours_En_Linge::all())->with('users',User::all())
+        return view('cours.liste_cours_direct')->with('cours',Cours_En_Linge::all())->with('users',User::all())
             ->with('userr',$user);
     }
     /**
@@ -185,8 +185,8 @@ class PostController extends Controller
         $post->matiere_id= $request->matiere_id;
         $post->photo ='uploads/posts/'.$image;
         $post->save();
-        Session::flash('creatmatiere');
-        return redirect()->back();
+        Session::flash('modfiermatiere');
+        return redirect()->route('cours_en_ligne');
     }
     public function ajouter_video(Request $request, $id)
     {
@@ -227,6 +227,7 @@ class PostController extends Controller
     {
         $post=  Cours_En_Linge::find($id);
         $post->destroy($id);
+        Session::flash('supprimer_cours');
         return redirect()->route('cours_en_ligne');
     }
     /**
@@ -242,7 +243,7 @@ class PostController extends Controller
     public function live(Request $request)
     {
         $categories = Category::all();
-        return view('cours.livecours')->with('matieres',$categories);
+        return view('cours.create_cours_direct')->with('matieres',$categories);
     }
     public function store_live(Request $request)
     {
@@ -264,7 +265,7 @@ class PostController extends Controller
             "slug"=>str_slug($request->titel)
         ]);
         Session::flash('creatmatiere');
-        return redirect()->back();
+        return redirect()->route('cours_en_ligne');
     }
 
     private function addImage($request, $input, $path) :string {
