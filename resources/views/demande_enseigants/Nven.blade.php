@@ -44,7 +44,7 @@
   
     
       @foreach($demande_enseigants as $ens)
-     
+
         <tr>
         
       <th scope="row">{{$ens->name}}</th>
@@ -57,9 +57,24 @@
       </td>
        <td><a href="{{route('download',$ens->id)}}"><button type="button" class="btn btn-secondary">Télecharger CV</button></a></td> 
       <td><a href="{{route('demande_enseigants.Plusinfo',$ens->id)}}"><button type="button" class="btn btn-light">Plus d'information...</button></a></td> 
-       <td><a href="{{route('emails.email',['id'=>$ens->id])}}"><button type="button" class="btn btn-success">Accepter</button></a></td>
-      <td><a href="{{route('demande_enseigants.rufse',['id'=>$ens->id])}}"  onclick="return myFunction();"><button type="button" class="btn btn-danger">Réfuser</button></a></td>
+            @foreach($user as $us)
+                @if($ens->email == $us->email)
+                    <?php
+                $nb=1
+                    ?>
+                    @break
+                @endif
+            @endforeach
+            @if($nb == 1)
+                <?php
+                $nb=0
+                ?>
+                <td colspan="2"> <span class="glyphicon glyphicon-ok" style="color:green;"><b>Accepter</b></span></td>
 
+            @else
+            <td><a href="{{route('emails.email',['id'=>$ens->id])}}"><button type="button" class="btn btn-success">Accepter</button></a></td>
+      <td><a href="{{route('demande_enseigants.rufse',['id'=>$ens->id])}}"  onclick="return myFunction();"><button type="button" class="btn btn-danger">Réfuser</button></a></td>
+                  @endif
         </tr>
 @endforeach
    @else

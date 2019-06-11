@@ -181,7 +181,7 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <a href="{{route('detaille_cours',['id_cour'=>$cour->id])}}"> <h4 class="media-heading">{{$cour->titel}}</h4></a>
-                                                        <span class="popular-course-price">{{$cour->prix}} DTN</span>
+                                                        <span class="popular-course-price">{{$cour->prix}} TND</span>
                                                     </div>
                                                 </div>
                                             @endif

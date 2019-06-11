@@ -35,17 +35,26 @@
                                                 
        </th>
       <td scope="row">{{$cour->titel}}</td>
+                @if ($cour->user_id == Auth::user()->id)
       <td><a class="" href="{{route('cours.edit',['id'=>$cour->id])}} ">
-
               <button type="button" class="btn btn-dark">Modfier</button>
       </a></td>
      <td><a class="" href="{{route('cours.delete',['id'=>$cour->id])}} " onclick="return myFunction();">
              <button type="button" class="btn btn-danger">Supprimer</button>
       </a></td>
+            @else
+                <td>
+                        <button type="button" class="btn btn-dark" disabled>Modfier</button>
+                    </td>
+                <td>
+                        <button type="button" class="btn btn-danger" disabled>Supprimer</button>
+                   </td>
+
+                @endif
 
       @foreach($users as $user)
        @if ($cour->user_id == $user->id)
-       <th scope="row">{{$user->name}}</th>
+       <th scope="row">{{$user->name}} {{$user->prenom}}</th>
        @endif
       @endforeach
     </tr>

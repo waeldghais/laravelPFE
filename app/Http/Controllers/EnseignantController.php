@@ -28,8 +28,8 @@ class EnseignantController extends Controller
         return view('demande_enseigants.index')->with('last_ins' , Denseigant::orderBy('created_at','desc')->first());
     }
     public function Nven()
-    {
-        return view('demande_enseigants.Nven')->with('demande_enseigants',Denseigant::all());
+    {$nb=0;
+        return view('demande_enseigants.Nven')->with('demande_enseigants',Denseigant::all())->with('user',User::all())->with('nbs',$nb);
     }
     /**
      * Show the form for creating a new resource.
